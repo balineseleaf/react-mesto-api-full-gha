@@ -5,7 +5,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.111.26
+IP 158.160.111.26
 
 Frontend https://balineseleaf.students.nomoredomainsrocks.ru
 
