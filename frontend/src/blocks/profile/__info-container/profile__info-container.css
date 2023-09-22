@@ -1,0 +1,13 @@
+.profile__info-container {
+  position: relative;
+  cursor: pointer;
+  transition: .3s ease;
+}
+
+.profile__info-container:hover .profile__image {
+  opacity: 0.3;
+}
+
+.profile__info-container:hover .profile__edit-icon {
+  opacity: 1;
+}

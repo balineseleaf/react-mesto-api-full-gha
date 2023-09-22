@@ -1,0 +1,19 @@
+.profile__image {
+  border-radius: 100%;
+  width: 120px;
+  object-fit: cover;
+  align-self: center;
+  height: 120px;
+  transition: opacity .3s ease;
+  background-image: url(../../../images/editavatar.svg);
+  background-position: center;
+}
+
+
+@media screen and (max-width: 1100px) {
+  .profile__image {
+    margin: 0 auto;
+    margin-bottom: 22.25px;
+    display: block;
+  }
+}
