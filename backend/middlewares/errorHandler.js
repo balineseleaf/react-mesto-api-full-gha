@@ -1,7 +1,7 @@
 function errorHandler(err, req, res, next) { // принято обрабатывать ошибки централизованно.
   // Для этого нужно добавить приложению мидлвэр такого вида:
   const { statusCode = 500, message } = err;
-
+  console.dir(err);
   res
     .status(statusCode)
     .send({
@@ -9,7 +9,6 @@ function errorHandler(err, req, res, next) { // принято обрабаты�
         ? 'На сервере произошла ошибка'
         : message,
     });
-  console.dir(err);
   return next();
 }
 
