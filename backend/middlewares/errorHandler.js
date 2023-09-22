@@ -9,6 +9,7 @@ function errorHandler(err, req, res, next) { // принято обрабаты�
         ? 'На сервере произошла ошибка'
         : message,
     });
+  console.dir(err);
   return next();
 }
 
