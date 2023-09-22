@@ -32,7 +32,7 @@ const createCard = (req, res, next) => {
 const deleteCardById = (req, res, next) => {
   const { cardId } = req.params;
   const { _id } = req.user;
-  return cardSchema.findByIdAndRemove(cardId)
+  return cardSchema.findById(cardId)
     .orFail()
     .then((card) => {
       const ownerId = card.owner.toString();

@@ -8,6 +8,7 @@ const { rateLimit } = require('express-rate-limit');
 const router = require('./routes');
 const errorHandler = require('./middlewares/errorHandler');
 const corsError = require('./middlewares/corsError');
+const { DB_URL } = require('./config');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const limiter = rateLimit({
@@ -17,7 +18,7 @@ const limiter = rateLimit({
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 });
 
-const { PORT = 3000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
+const { PORT = 3000 } = process.env;
 
 mongoose.connect(DB_URL, {
   useNewUrlParser: true,
@@ -29,12 +30,12 @@ app.use(cors());
 
 app.use(helmet());
 
+app.use(requestLogger); // подключаем логгер запросов
+
 // Apply the rate limiting middleware to all requests
 app.use(limiter);
 
 app.use(express.json());
-
-app.use(requestLogger); // подключаем логгер запросов
 
 app.use(router);
 

@@ -21,15 +21,12 @@ const getUser = (req, res, next) => {
 };
 
 // возвращаем всех пользователей
-const getUsers = (req, res) => {
+const getUsers = (req, res, next) => {
   userSchema.find({})
     .then((response) => {
       res.status(200).send(response);
     })
-    .catch((err) => {
-      console.log(err.name);
-      return res.status(500).send({ message: `Внутренняя ошибка сервера: ${err.name}` });
-    });
+    .catch(next);
 };
 
 // возвр пользователя  по ID

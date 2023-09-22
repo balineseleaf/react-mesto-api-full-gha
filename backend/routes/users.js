@@ -1,5 +1,6 @@
 const userRoutes = require('express').Router(); // создаёт объект, на который мы и повесим обработчики:
 const { celebrate, Joi } = require('celebrate');
+const { REG_URL } = require('../config');
 
 const {
   getUsers, getUserById, updateUser, updateAvatar, getUser,
@@ -23,8 +24,7 @@ userRoutes.patch('/me', celebrate({
 
 userRoutes.patch('/me/avatar', celebrate({
   body: Joi.object().keys({
-    // eslint-disable-next-line no-useless-escape
-    avatar: Joi.string().required().regex(/https?:\/\/(www\.)?[\w\-\.\_\~\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=]+\#?$/i),
+    avatar: Joi.string().required().regex(REG_URL),
   }),
 }), updateAvatar);
 

@@ -110,7 +110,7 @@ class Api {
 }
 
 const api = new Api({
-  url: "https://mesto.nomoreparties.co/v1/cohort-68",
+  url: "https://api.balineseleaf.students.nomoredomainsrocks.ru",
   headers: {
     authorization: "79aff481-506e-4c4c-8308-be7829df1002",
     "Content-Type": "application/json",

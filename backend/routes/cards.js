@@ -1,5 +1,6 @@
 const cardRoutes = require('express').Router(); // создаёт объект, на который мы и повесим обработчики:
 const { celebrate, Joi } = require('celebrate');
+const { REG_URL } = require('../config');
 
 const {
   getCards,
@@ -14,8 +15,7 @@ cardRoutes.get('/', getCards); // регаем по такому-то роуту
 cardRoutes.post('/', celebrate({ // Такое описание говорит, что body должно быть объектом с ключами:
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
-    // eslint-disable-next-line no-useless-escape
-    link: Joi.string().required().regex(/https?:\/\/(www\.)?[\w\-\.\_\~\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=]+\#?$/i),
+    link: Joi.string().required().regex(REG_URL),
   }),
 }), createCard);
 
