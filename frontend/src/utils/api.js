@@ -8,9 +8,7 @@ class Api {
   getUserData() {
     return fetch(`${this._url}/users/me`, {
       method: "GET",
-      headers: {
-        authorization: this._authorization,
-      },
+      headers: getHeaders(),
     }).then(this._handleResponse);
   }
 
@@ -18,10 +16,7 @@ class Api {
     return fetch(`${this._url}/cards`, {
       // Возвращает Promise- объект
       method: "GET",
-      headers: {
-        authorization: this._authorization,
-        "Content-type": "application/json",
-      },
+      headers: getHeaders(),
     }) // 200 ms проходит, в эвент луп, и когда запрос придет обратно, отработает этот колбэк (ниже)
       .then(this._handleResponse);
   }
@@ -29,10 +24,7 @@ class Api {
   setUpdateUserData(userData) {
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
-      headers: {
-        authorization: this._authorization,
-        "Content-Type": "application/json",
-      },
+      headers: getHeaders(),
       body: JSON.stringify({
         name: userData.name,
         about: userData.about,
@@ -44,10 +36,7 @@ class Api {
     // здесь лежит наша ссылка введенная с инпута
     return fetch(`${this._url}/users/me/avatar`, {
       method: "PATCH",
-      headers: {
-        authorization: this._authorization,
-        "Content-Type": "application/json",
-      },
+      headers: getHeaders(),
       body: JSON.stringify(avatar),
       //body: JSON.stringify({ avatar: avatar.link }), // поле name="link" у инпута  в попапе
     }).then(this._handleResponse);
@@ -57,10 +46,7 @@ class Api {
     // то , что ввели в инпут - имя и линк
     return fetch(`${this._url}/cards`, {
       method: "POST",
-      headers: {
-        authorization: this._authorization,
-        "Content-type": "application/json",
-      },
+      headers: getHeaders(),
       body: JSON.stringify({
         name: name,
         link: link,
@@ -71,30 +57,21 @@ class Api {
   deleteCard(cardID) {
     return fetch(`${this._url}/cards/${cardID}`, {
       method: "DELETE",
-      headers: {
-        authorization: this._authorization,
-        "Content-type": "application/json",
-      },
+      headers: getHeaders(),
     }).then(this._handleResponse);
   }
 
   addLike(cardId) {
     return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: "PUT",
-      headers: {
-        authorization: this._authorization,
-        "Content-type": "application/json",
-      },
+      headers: getHeaders(),
     }).then(this._handleResponse);
   }
 
   deleteLike(cardId) {
     return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: "DELETE",
-      headers: {
-        authorization: this._authorization,
-        "Content-type": "application/json",
-      },
+      headers: getHeaders(),
     }).then(this._handleResponse);
   }
 
@@ -109,12 +86,17 @@ class Api {
   }
 }
 
+const getHeaders = () => {
+  const token = localStorage.getItem('jwt');
+  return {
+    authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  }
+}
+
 const api = new Api({
   url: "https://api.balineseleaf.students.nomoredomainsrocks.ru",
-  headers: {
-    authorization: "79aff481-506e-4c4c-8308-be7829df1002",
-    "Content-Type": "application/json",
-  },
+  headers: getHeaders(),
 });
 
 export default api;
