@@ -1,5 +1,4 @@
-// eslint-disable-next-line no-useless-escape
-const { REG_URL = /^(https?:\/\/(www\.)?[\w\-\.\_\~\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=]+\#?)$/i } = process.env;
+const REG_URL = /(http:\/\/(?:www.|(?!www))[A-z0-9-]+\.[^\s]+)|(https:\/\/(?:www.|(?!www))[A-z0-9-]+\.[^\s]+)/;
 const { DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 module.exports = {
   REG_URL,

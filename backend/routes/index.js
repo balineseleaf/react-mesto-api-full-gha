@@ -34,6 +34,6 @@ router.post('/signup', celebrate({ // роуты, не требующие авт
   }),
 }), postUser);
 
-router.use('*', (req, res, next) => next(new NotFoundError('Запрашиваемая страница не найдена')));
+router.use('*', auth, (req, res, next) => next(new NotFoundError('Запрашиваемая страница не найдена')));
 
 module.exports = router;

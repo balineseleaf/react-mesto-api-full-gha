@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-// const validator = require('validator');
+const { REG_URL } = require('../config');
 
 const cardSchema = new mongoose.Schema({
   name: {
@@ -13,8 +13,7 @@ const cardSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(url) {
-        // eslint-disable-next-line no-useless-escape
-        const regex = /https?:\/\/(www\.)?[\w\-\.\_\~\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=]+\#?$/i;
+        const regex = REG_URL;
         return regex.test(url);
       },
       message: 'Некорректный url',

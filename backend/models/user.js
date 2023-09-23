@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const { REG_URL } = require('../config');
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -19,8 +20,7 @@ const userSchema = new mongoose.Schema({
     default: 'https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png',
     validate: {
       validator(url) {
-        // eslint-disable-next-line no-useless-escape
-        const regex = /https?:\/\/(www\.)?[\w\-\.\_\~\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=]+\#?$/i;
+        const regex = REG_URL;
         return regex.test(url);
       },
       message: 'Некорректный url',
