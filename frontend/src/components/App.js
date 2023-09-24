@@ -109,7 +109,7 @@ function App() {
         if (res.JWT) {
           setHeaderEmail(email); // передаем почту
           setIsLoggedIn(true); // вошли
-          localStorage.setItem("jwt", res.token);
+          localStorage.setItem("jwt", res.JWT);
           navigate("/");
         }
       })
