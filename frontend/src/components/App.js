@@ -106,7 +106,7 @@ function App() {
     return auth
       .login(email, password)
       .then((res) => {
-        if (res.token) {
+        if (res.JWT) {
           setHeaderEmail(email); // передаем почту
           setIsLoggedIn(true); // вошли
           localStorage.setItem("jwt", res.token);
