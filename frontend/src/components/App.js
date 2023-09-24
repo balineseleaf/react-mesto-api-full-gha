@@ -166,7 +166,7 @@ function App() {
   //дальше проходим по всем текущим карточкам, и если у нее id равен тому что ты лайкнули, то карточка подменяется на ту что пришла в ответе с сервера
   function handleCardLike(card) {
     // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
     if (!isLiked) {
       api
         .addLike(card._id)
