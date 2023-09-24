@@ -8,8 +8,8 @@ const usersRouter = require('./users');// импортируем роут пол
 const cardsRouter = require('./cards');// импортируем роут с карточками из card.js
 const { login, postUser } = require('../controllers/users'); // забираем из контроллера users данные
 
-router.use('/users', auth, usersRouter); // добавл мидлвеир авторизации
-router.use('/cards', auth, cardsRouter); // добавл мидлвеир авторизации
+router.use('/api/users', auth, usersRouter); // добавл мидлвеир авторизации
+router.use('/api/cards', auth, cardsRouter); // добавл мидлвеир авторизации
 
 router.get('/crash-test', () => {
   setTimeout(() => {
@@ -17,14 +17,14 @@ router.get('/crash-test', () => {
   }, 0);
 });
 
-router.post('/signin', celebrate({ // роуты, не требующие авторизации,
+router.post('/api/signin', celebrate({ // роуты, не требующие авторизации,
   body: Joi.object().keys({
     email: Joi.string().email().required(),
     password: Joi.string().required(),
   }),
 }), login);
 
-router.post('/signup', celebrate({ // роуты, не требующие авторизации,
+router.post('/api/signup', celebrate({ // роуты, не требующие авторизации,
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30),
     about: Joi.string().min(2).max(30),
